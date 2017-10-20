@@ -1,0 +1,69 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container">
+            <img class="img-fluid" src="img/profile.png" alt="">
+            <div class="intro-text">
+                <span class="name">Ugo Pradère</span>
+                <hr class="star-light">
+                <span class="skills">
+                    Web Developer<br />
+                    <i>-- Simplement efficace --</i>
+                </span>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Contact Section -->
+    <section id="blog">
+        <div class="container">
+            <h2 class="text-center">Découvrez mon blog</h2>
+            <hr class="star-primary">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                   <p>Venez découvrir mes articles écrits au fil de mes découvertes. Vous trouverez de nombreuses astuces dans le développement web principalement backend avec PHP et son fameux framework Symfony</p><br />
+                    <p>
+                        <a href="posts" class="btn btn-lg btn-success" id="bouton">
+                            <i class="fa fa-caret-square-o-right"></i>
+                            Blog
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <h2 class="text-center">A propos</h2>
+            <hr class="star-light">
+            <div class="row">
+                <div class="col-lg-4 ml-auto">
+                    <p>Après plus de dix ans d'une carrière riche et productive dans la recherche scientifique, je me lance un nouveau challenge : faire de mon rêve d'enfance une réalité et devenir développeur web.
+                </div>
+                <div class="col-lg-4 mr-auto">
+                    <p>Mes qualités transverses de créativité et d'adaptabilité sont mes principaux atouts. Amenez un regard neuf mais perspicace à vos projets web par mon profil atypique !</p>
+                </div>
+                <div class="col-lg-8 mx-auto text-center">
+                    <a href="../App/Files/CV.pdf" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i>
+                        Téléchargez mon CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include '_contactForm.twig' %}
+
+{% endblock %}

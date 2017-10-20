@@ -1,0 +1,46 @@
+{% extends 'layout.twig' %}
+
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <span class="name">{{ post.title }}</span>
+                <hr class="star-light">
+                <div class="descriptionText">
+                    <p>Mis à jour le {{ post.modificationDate | date("d/m/Y") }} par {{ post.author }}</p>
+                    <p><i>{{ post.chapo }}</i></p>
+                </div>
+                <hr class="star-light">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <p>{{ post.content | nl2br }}</p>
+
+                <form action="edit/{{ post.slug }}">
+                    <button type="submit" class="btn btn-lg btn-outline"/><i class="fa fa-pencil"></i> Modifier</button>
+                </form>
+
+                <form action="../post/delete" method="post">
+                    <input type="hidden" name='id' value="{{ post.id }}" />
+                    <button type="submit" href="../post/delete/{{ post.id }}" class="btn btn-lg btn-outline"><i class="fa fa-trash-o"></i> Supprimer</button>
+                </form>
+
+                <form action="../posts">
+                    <button type="submit" class="btn btn-lg btn-outline"/><i class="fa fa-angle-double-left"></i> Retour</button>
+                </form>
+
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+

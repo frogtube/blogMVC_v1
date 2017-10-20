@@ -1,0 +1,62 @@
+{% block form %}
+
+    <!-- Contact Section -->
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form action="" method="post" id="postForm">
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Auteur</label>
+                                <input class="form-control" name="author" id="author" type="text" placeholder="Auteur" value="{{ post.author }}" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Titre</label>
+                                <input class="form-control" name="title" id="title" type="text" placeholder="Titre de l'article" value="{{ post.title }}" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Chapo de l'article</label>
+                                <textarea class="form-control" name="chapo" id="chapo" rows="4" cols="60" maxlength="255" placeholder="Chapo de l'article" required>{{ post.chapo }}</textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Contenu de l'article</label>
+                                <textarea class="form-control" name="content" id="content" rows="20" cols="60"  placeholder="Votre article" required>{{ post.content }}</textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+
+                        {% if post.id is defined %}
+                            <input type="hidden" name="id" value="{{ post.id }}" />
+                            <input type="submit" class="btn btn-success btn-lg" id="sendMessageButton" value="Modifier" name="modifier" />
+                        {% else %}
+                            <input type="submit" class="btn btn-success btn-lg" id="sendMessageButton" value="Ajouter" name="ajouter"/>
+                        {% endif %}
+                    </form>
+
+                    <form class="btn btn-lg btn-outline" action="../{{ post.slug }}
+                        {% if posts.slug is empty %}
+                            {{ 'web/posts' }}
+                        {% endif %}
+                            <input type="submit" value="Annuler" />
+                    </form>
+
+                </div>
+            </div>
+
+
+{% endblock %}
+
+
+

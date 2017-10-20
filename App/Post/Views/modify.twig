@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    <section id="form">
+        <div class="container">
+            <h2 class="text-center">Modifier un article</h2>
+            <hr class="star-primary">
+            {% include '_postForm.twig' %}
+        </div>
+    </section>
+{% endblock %}
+
+

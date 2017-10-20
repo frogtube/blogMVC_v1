@@ -1,0 +1,26 @@
+{
+    "name": "ugo/mvc",
+    "authors": [
+        {
+            "name": "frogtube",
+            "email": "u.pradere@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MyFramework\\": "vendor/MyFramework",
+            "App\\": "App",
+            "Post\\": "App/Post",
+            "Model\\": "App/Repository",
+            "Entity\\": "App/Entity",
+            "Appdefault\\": "App/Appdefault",
+            "Services\\": "App/Services",
+            "Config\\": "App/Config"
+        }
+    },
+    "require": {
+        "twig/twig": "^1.35",
+        "swiftmailer/swiftmailer": "^5.4",
+        "twig/extensions": "^1.5"
+    }
+}
