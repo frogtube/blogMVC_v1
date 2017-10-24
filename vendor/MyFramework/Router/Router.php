@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 03/10/2017
- * Time: 14:35
- */
 
 namespace MyFramework\Router;
 

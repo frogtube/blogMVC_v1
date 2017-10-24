@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 05/10/2017
- * Time: 06:36
- */
 
 namespace Post;
 
@@ -45,14 +39,21 @@ class PostController extends Controller
         }
     }
 
-    public function update()
+    public function update($post)
     {
+        if($post == null)
+        {
+            $slug = str_replace('post/edit/', '', $_GET['url']);
+            $db = new PostManager();
+            $post = $db->getUnique($slug);
+        }
         // Getting slug from url
-        $slug = str_replace('post/edit/', '', $_GET['url']);
-        $db = new PostManager();
-        $post = $db->getUnique($slug);
         if(!$post == null)
         {
+            if(!isset($slug))
+            {
+                $slug = $_POST['slug'];
+            }
             $this->startTwig($this->viewPath,'modify.twig', $post, 'post', 'Ugo Pradère | ' . $slug, '../../');
         }
         else
@@ -77,7 +78,11 @@ class PostController extends Controller
             $db->executeSave($post);
             header("Location: ../../post/" . $post->slug());
         }
-
+        else
+        {
+            $_POST['errors'] = $post->getErrors();
+            $this->update($_POST);
+        }
     }
 
     public function add()

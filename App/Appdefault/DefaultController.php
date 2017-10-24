@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 13/10/2017
- * Time: 11:11
- */
 
 namespace Appdefault;
 
@@ -21,24 +15,23 @@ class DefaultController extends Controller
         $this->viewPath = ROOT . '/App/AppDefault/views';
     }
 
-    public function home()
+    public function home($vars)
     {
-        $this->startTwig($this->viewPath, 'home.twig', null, null,'Ugo Pradère','../');
+        $this->startTwig($this->viewPath, 'home.twig', $vars, 'mail','Ugo Pradère','../');
     }
 
-    public function contact($mail)
+    public function contact()
     {
-        $this->startTwig($this->viewPath, 'home.twig', $mail, 'mail',  'Blog','../');
-
         $mail = new Mail($_POST);
         if($mail->isValid())
         {
             $mail->sendEmail();
+            header("Location: ../web/");
         }
         else
         {
             $_POST['errors'] = $mail->getErrors();
-            $this->contact($_POST);
+            $this->home($_POST);
         }
     }
 

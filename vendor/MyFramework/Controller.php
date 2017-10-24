@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 04/10/2017
- * Time: 14:56
- */
+
 namespace MyFramework;
 
 use Appdefault\DefaultController;

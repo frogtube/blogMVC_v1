@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 24/10/2017
- * Time: 11:42
- */
 
 namespace Entity;
 
 
-class Mail
+use MyFramework\Entity;
+
+class Mail extends Entity
 {
     protected $firstname;
     protected $lastname;
@@ -17,28 +13,7 @@ class Mail
     protected $message;
     protected $errors = [];
 
-    public function __construct(array $data = [])
-    {
-        if (!empty($data))
-        {
-            $this->hydrate($data);
-        }
-    }
-
-    private function hydrate($data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set'.ucfirst($key);
-
-            if (is_callable([$this, $method]))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
-    public function isValid()
+   public function isValid()
     {
         return !(empty($this->firstname) || empty($this->lastname) || empty($this->email) || empty($this->message));
     }
@@ -51,18 +26,12 @@ class Mail
         );
     }
 
+    // GETTERS
+    public function firstname() { return $this->firstname; }
+    public function lastname() { return $this->lastname; }
+    public function email() { return $this->email; }
+    public function message() { return $this->message; }
 
-        /**
-     * @return mixed
-     */
-    public function firstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * @param mixed $firstname
-     */
     public function setFirstname($firstname)
     {
         if(is_string($firstname))
@@ -71,24 +40,13 @@ class Mail
             {
                 $this->firstname = $firstname;
             }
-        }
-        else
-        {
-            $this->errors[] = "Votre prénom doit contenir un maximum de 50 caratères";
+            else
+            {
+                $this->errors[] = "Votre prénom doit contenir un maximum de 50 caratères";
+            }
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function lastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
     public function setLastname($lastname)
     {
         if(is_string($lastname))
@@ -97,24 +55,13 @@ class Mail
             {
                 $this->lastname = $lastname;
             }
-        }
-        else
-        {
-            $this->errors[] = "Votre nom doit contenir un maximum de 50 caratères";
+            else
+            {
+                $this->errors[] = "Votre nom doit contenir un maximum de 50 caratères";
+            }
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function email()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
     public function setEmail($email)
     {
         if(is_string($email))
@@ -123,24 +70,13 @@ class Mail
             {
                 $this->email = $email;
             }
-        }
-        else
-        {
-            $this->errors[] = "Votre email doit contenir un maximum de 50 caratères";
+            else
+            {
+                $this->errors[] = "Votre email doit contenir un maximum de 50 caratères";
+            }
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function message()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param mixed $message
-     */
     public function setMessage($message)
     {
         if(is_string($message))
@@ -149,18 +85,10 @@ class Mail
             {
                 $this->message = $message;
             }
+            else
+            {
+                $this->errors[] = "Votre message doit contenir un maximum de 2000 caratères";
+            }
         }
-        else
-        {
-            $this->errors[] = "Votre message doit contenir un maximum de 2000 caratères";
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->errors;
     }
 }

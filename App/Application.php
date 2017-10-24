@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 03/10/2017
- * Time: 14:17
- */
 
 namespace App;
 
@@ -30,7 +24,7 @@ class Application
         // Homepage
         $router->get('/', function() {
             $controller = new DefaultController;
-            $controller->home();
+            $controller->home(null);
         });
 
         // Contact form sent
@@ -66,7 +60,7 @@ class Application
         // Modifying an article with a form
         $router->get('/post/edit/:slug', function() {
             $controller = new PostController;
-            $controller->update();
+            $controller->update(null);
         });
 
         // Saving modifications of an article to database

@@ -5,6 +5,15 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if mail.errors is not empty %}
+        <div class="alert alert-warning" id="errors">
+            <p>Votre message n'a pas été envoyé :</p>
+            {% for error in mail.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <!-- Header -->
     <header class="masthead">
         <div class="container">

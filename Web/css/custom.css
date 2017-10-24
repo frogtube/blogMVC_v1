@@ -31,4 +31,11 @@
     margin-bottom: 160px !important;
     margin-top: 100px !important;
 }
+/* Home.twig */
+#errors {
+    margin-top: 108px;
+    margin-bottom: 0;
+    padding-top: 20px;
+    text-align: center;
+}
 

@@ -7,34 +7,36 @@
             <hr class="star-primary">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
+
+
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <form action="" method="post" name="sentMessage" id="contactForm">
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>Prénom</label>
-                                <input class="form-control" name="firstname" id="firstname" type="text" placeholder="Votre prénom" required data-validation-required-message="Veuillez indiquer votre prénom">
+                                <input class="form-control" name="firstname" id="firstname" type="text" placeholder="Votre prénom" value="{{ mail.firstname }}" required data-validation-required-message="Veuillez indiquer votre prénom">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>Nom</label>
-                                <input class="form-control" name="lastname" id="lastname" type="text" placeholder="Votre nom" required data-validation-required-message="Veuillez indiquer votre nom">
+                                <input class="form-control" name="lastname" id="lastname" type="text" placeholder="Votre nom" value="{{ mail.lastname }}" required data-validation-required-message="Veuillez indiquer votre nom">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>Adresse Email</label>
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Votre adresse email" required data-validation-required-message="Please enter your email address.">
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Votre adresse email" value="{{ mail.email }}" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>Message</label>
-                                <textarea class="form-control" name="message" id="message" rows="5" placeholder="Votre message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" name="message" id="message" rows="5" placeholder="Votre message" required data-validation-required-message="Please enter a message.">{{ mail.message }}</textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
