@@ -8,7 +8,7 @@
 
 namespace MyFramework\Router;
 
-require 'route.php';
+// require 'route.php';
 
 
 class Router
@@ -31,9 +31,9 @@ class Router
         $this->routes['POST'][] = $route;
     }
 
-    public function run()
+    public function getRouting()
     {
-        // Checking $_SERVER['REQUEST_METHOD'] exists in the routes array
+        // Checking if $_SERVER['REQUEST_METHOD'] exists in the routes array
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']]))
         {
             // if not, an exception is thrown

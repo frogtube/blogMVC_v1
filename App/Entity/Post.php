@@ -18,6 +18,7 @@ class Post
     protected $slug;
     protected $creationDate;
     protected $modificationDate;
+    protected $errors = [];
 
     public function __construct(array $data = [])
     {
@@ -29,7 +30,7 @@ class Post
 
     public function isValid()
     {
-        return !(empty($this->author) || empty($this->title) || empty($this->content) || empty($this->chapo) || empty($this->chapo));
+        return !(empty($this->author) || empty($this->title) || empty($this->content) || empty($this->chapo) || empty($this->slug));
     }
 
     public function id() { return $this->id; }
@@ -58,7 +59,14 @@ class Post
     {
         if(is_string($author))
         {
-            $this->author = $author;
+            if(strlen($author)<50)
+            {
+                $this->author = $author;
+            }
+            else
+            {
+                $this->errors[] = "Le nom de l'auteur ne peut exéder 50 caractères";
+            }
         }
     }
 
@@ -77,7 +85,14 @@ class Post
     {
         if(is_string($title))
         {
-            $this->title = $title;
+            if(strlen($title)<250)
+            {
+                $this->title = $title;
+            }
+            else
+            {
+                $this->errors[] = "Le titre de l'article ne peut exéder 250 caractères";
+            }
         }
     }
 
@@ -96,7 +111,14 @@ class Post
     {
         if(is_string($chapo))
         {
-            $this->chapo = $chapo;
+            if(strlen($chapo)<250)
+            {
+                $this->chapo = $chapo;
+            }
+            else
+            {
+                $this->errors[] = "Le chapô de l'article ne peut exéder 250 caractères";
+            }
         }
     }
 
@@ -115,7 +137,14 @@ class Post
     {
         if(is_string($content))
         {
-            $this->content = $content;
+            if(strlen($content)<2000)
+            {
+                $this->content = $content;
+            }
+            else
+            {
+                $this->errors[] = "Le contenu de l'article ne peut exéder 2000 caractères";
+            }
         }
     }
 
@@ -134,7 +163,10 @@ class Post
     {
         if(is_string($slug))
         {
-            $this->slug = $slug;
+            if(strlen($slug)<250)
+            {
+                $this->slug = $slug;
+            }
         }
     }
 
@@ -151,7 +183,13 @@ class Post
      */
     public function setCreationDate($creationDate)
     {
-        $this->creationDate = $creationDate;
+        if(is_string($creationDate))
+        {
+            if(strlen($creationDate)<20)
+            {
+                $this->creationDate = $creationDate;
+            }
+        }
     }
 
     /**
@@ -167,7 +205,18 @@ class Post
      */
     public function setModificationDate($modificationDate)
     {
-        $this->modificationDate = $modificationDate;
+        if(is_string($modificationDate))
+        {
+            if(strlen($modificationDate)<20)
+            {
+                $this->modificationDate = $modificationDate;
+            }
+        }
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     private function hydrate($data)
@@ -188,34 +237,35 @@ class Post
 
     /**
      * Vérifie si la clé existe.
-     */
+
     public function offsetExists($key)
     {
         return isset($this->tableau[$key]);
     }
-
+     */
     /**
      * Retourne la valeur de la clé demandée.
      * Une notice sera émise si la clé n'existe pas, comme pour les vrais tableaux.
-     */
+
     public function offsetGet($key)
     {
         return $this->tableau[$key];
     }
-
+     */
     /**
      * Assigne une valeur à une entrée.
-     */
+
     public function offsetSet($key, $value)
     {
         $this->tableau[$key] = $value;
     }
-
+     */
     /**
      * Supprime une entrée et émettra une erreur si elle n'existe pas, comme pour les vrais tableaux.
-     */
+
     public function offsetUnset($key)
     {
         unset($this->tableau[$key]);
     }
+     */
 }

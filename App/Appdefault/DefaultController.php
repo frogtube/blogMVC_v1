@@ -9,23 +9,37 @@
 namespace Appdefault;
 
 
+use Entity\Mail;
 use MyFramework\Controller;
 use Services\Services;
 
 class DefaultController extends Controller
 {
-    protected $viewPath = ROOT . '/App/AppDefault/views';
+
+    public function __construct()
+    {
+        $this->viewPath = ROOT . '/App/AppDefault/views';
+    }
 
     public function home()
     {
         $this->startTwig($this->viewPath, 'home.twig', null, null,'Ugo Pradère','../');
     }
 
-    public function contact()
+    public function contact($mail)
     {
-        $this->startTwig($this->viewPath, 'home.twig', null, null,  'Blog','../');
-        $container = new Services();
-        $container->sendEmail();
+        $this->startTwig($this->viewPath, 'home.twig', $mail, 'mail',  'Blog','../');
+
+        $mail = new Mail($_POST);
+        if($mail->isValid())
+        {
+            $mail->sendEmail();
+        }
+        else
+        {
+            $_POST['errors'] = $mail->getErrors();
+            $this->contact($_POST);
+        }
     }
 
     public function pageDoesntExists()

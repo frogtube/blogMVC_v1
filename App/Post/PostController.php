@@ -14,11 +14,10 @@ use MyFramework\Controller;
 
 class PostController extends Controller
 {
-    protected $viewPath = ROOT . '/App/Post/views';
 
     public function __construct()
     {
-        $this->viewPath;
+        $this->viewPath = ROOT . '/App/Post/views';
         $this->template = 'layout';
     }
 
@@ -57,32 +56,45 @@ class PostController extends Controller
             $this->startTwig($this->viewPath,'modify.twig', $post, 'post', 'Ugo Pradère | ' . $slug, '../../');
         }
         else
-        {// If null is returned
+        {
+            // If null is returned
             $this->notFound();
         }
     }
 
-    public function create()
+    public function create($post)
     {
-        $this->startTwig($this->viewPath,'create.twig', null, null,'Ugo Pradère | New article', '../');
+        $this->startTwig($this->viewPath,'create.twig', $post, 'post','Ugo Pradère | New article', '../');
     }
 
     public function save()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
         $post = new Post($_POST);
-        $db = new PostManager();
-        $db->executeSave($post);
-        header("Location: ../../post/" . $post->slug());
+        if($post->isValid())
+        {
+            $db = new PostManager();
+            $db->executeSave($post);
+            header("Location: ../../post/" . $post->slug());
+        }
+
     }
 
     public function add()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
         $post = new Post($_POST);
-        $db = new PostManager();
-        $db->executeAdd($post);
-        header("Location: ../post/" . $post->slug());
+        if($post->isValid())
+        {
+            $db = new PostManager();
+            $db->executeAdd($post);
+            header("Location: ../post/" . $post->slug());
+        }
+        else
+        {
+            $_POST['errors'] = $post->getErrors();
+            $this->create($_POST);
+        }
     }
 
     public function delete()

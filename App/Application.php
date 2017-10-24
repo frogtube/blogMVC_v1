@@ -36,20 +36,19 @@ class Application
         // Contact form sent
         $router->post('/', function() {
             $controller = new DefaultController;
-            $controller->contact();
+            $controller->contact(null);
         });
 
         // Create a new article with a form
         $router->get('/post/new', function() {
             $controller = new PostController;
-            $controller->create();
+            $controller->create(null);
         });
 
         // Saving a new article to database
         $router->post('/post/new', function() {
             $controller = new PostController;
             $controller->add();
-            header("Location: ../post/" . $post->slug());
         });
 
         // Display the full list of articles
@@ -82,11 +81,9 @@ class Application
             $controller->delete();
         });
 
-
-        $router->run();
+        $router->getRouting();
     }
 
     public function run() { $this->getController(); }
 
-    public function name() { return $this->name; }
 }

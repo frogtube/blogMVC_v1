@@ -37,11 +37,6 @@ class PostManager extends PDOFactory
 
     }
 
-    public function delete($slug)
-    {
-        $this->getPDO()->exec('DELETE FROM post WHERE id = '.(string) $slug);
-    }
-
     public function executeSave($post)
     {
 

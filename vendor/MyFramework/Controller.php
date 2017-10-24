@@ -9,7 +9,7 @@ namespace MyFramework;
 
 use Appdefault\DefaultController;
 
-class Controller
+abstract class Controller
 {
     protected $viewPath;
     protected $template;
