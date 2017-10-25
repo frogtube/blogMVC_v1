@@ -23,7 +23,7 @@ class PDOFactory
     // Connexion to database
     public function getPDO()
     {
-        // Avoid multiple db connexion for multiple queries
+        // Avoid multiple db connexion for the various queries
         if ($this->pdo === null)
         {
             try

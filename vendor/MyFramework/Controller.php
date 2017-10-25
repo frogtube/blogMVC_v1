@@ -9,6 +9,7 @@ abstract class Controller
     protected $viewPath;
     protected $template;
 
+    // Initiate the Twig environment to display the views
     public function startTwig($viewPath, $view, $variables, $varname, $title, $stylePath)
     {
         $loader = new \Twig_Loader_Filesystem($viewPath);
@@ -16,7 +17,7 @@ abstract class Controller
             'cache' => false // ROOT . '/tmp' in production
         ]);
 
-        // Adding twig extension for text manipulation
+        // Addtwig extension for text manipulation (not required)
         $twig->addExtension(new \Twig_Extensions_Extension_Text());
 
         echo $twig->render($view, array(

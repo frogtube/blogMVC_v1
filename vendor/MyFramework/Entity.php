@@ -3,7 +3,7 @@
 namespace MyFramework;
 
 
-class Entity
+abstract class Entity
 {
     protected $errors = [];
 
@@ -28,6 +28,7 @@ class Entity
         }
     }
 
+    // Stock error messages to be displayed on views
     public function getErrors()
     {
         return $this->errors;

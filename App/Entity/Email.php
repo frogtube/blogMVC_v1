@@ -5,19 +5,21 @@ namespace Entity;
 
 use MyFramework\Entity;
 
-class Mail extends Entity
+class Email extends Entity
 {
+    // Vars corresponding to contactForm fields
     protected $firstname;
     protected $lastname;
     protected $email;
     protected $message;
-    protected $errors = [];
 
-   public function isValid()
+    // Check if the form was correctly filled in
+    public function isValid()
     {
         return !(empty($this->firstname) || empty($this->lastname) || empty($this->email) || empty($this->message));
     }
 
+    // Send an email
     public function sendEmail()
     {
         mail(   'u.pradere@gmail.com',
@@ -32,6 +34,7 @@ class Mail extends Entity
     public function email() { return $this->email; }
     public function message() { return $this->message; }
 
+    // SETTERS with appropriate verification on user's input
     public function setFirstname($firstname)
     {
         if(is_string($firstname))

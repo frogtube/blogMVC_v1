@@ -14,11 +14,15 @@ class Router
     {
         $this->url = $url;
     }
+
+    // Save a new route using the method GET
     public function get($path, $callable)
     {
         $route = new Route($path, $callable);
         $this->routes['GET'][] = $route;
     }
+
+    // Save a new route using the method POST
     public function post($path, $callable)
     {
         $route = new Route($path, $callable);
@@ -43,7 +47,6 @@ class Router
             }
         }
         $route->noMatchingRoute();
-        // throw new RouterException('No matching route');
     }
 
 }

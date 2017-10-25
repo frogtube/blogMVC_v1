@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use MyFramework\Router\Router;
 use Post\PostController;
 use Appdefault\DefaultController;
@@ -16,6 +15,7 @@ class Application
         $this->name = 'Blog';
     }
 
+    // Call a controller and a specific function upon url
     public function getController()
     {
         // Router Initialization
@@ -33,43 +33,43 @@ class Application
             $controller->contact(null);
         });
 
-        // Create a new article with a form
+        // Create a new blog post with postForm
         $router->get('/post/new', function() {
             $controller = new PostController;
             $controller->create(null);
         });
 
-        // Saving a new article to database
+        // Saving a new blog post to database
         $router->post('/post/new', function() {
             $controller = new PostController;
             $controller->add();
         });
 
-        // Display the full list of articles
+        // Display the full list of blog posts
         $router->get('/posts', function() {
             $controller = new PostController;
             $controller->index();
         });
 
-        // Display a selected article
+        // Display a selected blog post
         $router->get('/post/:slug', function() {
             $controller = new PostController;
             $controller->show();
         });
 
-        // Modifying an article with a form
+        // Modify a blog post with postForm
         $router->get('/post/edit/:slug', function() {
             $controller = new PostController;
             $controller->update(null);
         });
 
-        // Saving modifications of an article to database
+        // Save modifications of a blog post to database
         $router->post('/post/edit/:slug', function() {
             $controller = new PostController;
             $controller->save();
         });
 
-        // Deleting an article from database
+        // Delete a blog post from database
         $router->post('/post/:slug', function() {
             $controller = new PostController;
             $controller->delete();
@@ -79,5 +79,4 @@ class Application
     }
 
     public function run() { $this->getController(); }
-
 }

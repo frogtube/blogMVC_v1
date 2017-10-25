@@ -15,6 +15,7 @@ class PostController extends Controller
         $this->template = 'layout';
     }
 
+    // Display the list of blog posts
     public function index()
     {
         $db = new PostManager();
@@ -22,6 +23,7 @@ class PostController extends Controller
         $this->startTwig($this->viewPath, 'index.twig', $posts, 'posts','Ugo Pradère | Blog', null);
     }
 
+    // Display a single blog post
     public function show()
     {
         // Getting slug from url
@@ -39,6 +41,7 @@ class PostController extends Controller
         }
     }
 
+    // Display the postForm with blog post infos filled in for modification and update
     public function update($post)
     {
         if($post == null)
@@ -63,11 +66,7 @@ class PostController extends Controller
         }
     }
 
-    public function create($post)
-    {
-        $this->startTwig($this->viewPath,'create.twig', $post, 'post','Ugo Pradère | New article', '../');
-    }
-
+    // Send a request to save the updated blog post to database
     public function save()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
@@ -76,6 +75,7 @@ class PostController extends Controller
         {
             $db = new PostManager();
             $db->executeSave($post);
+            // Redirect to the page displaying the article
             header("Location: ../../post/" . $post->slug());
         }
         else
@@ -85,6 +85,13 @@ class PostController extends Controller
         }
     }
 
+    // Display an empty postForm for writing a new blog post
+    public function create($post)
+    {
+        $this->startTwig($this->viewPath,'create.twig', $post, 'post','Ugo Pradère | New article', '../');
+    }
+
+    // Send a request to add the new blog post to database
     public function add()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
@@ -93,6 +100,7 @@ class PostController extends Controller
         {
             $db = new PostManager();
             $db->executeAdd($post);
+            // Redirect to the page displaying the article
             header("Location: ../post/" . $post->slug());
         }
         else
@@ -102,6 +110,7 @@ class PostController extends Controller
         }
     }
 
+    // Send a request to delete a blog post in database
     public function delete()
     {
         $post = new Post($_POST);
